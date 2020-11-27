@@ -1,25 +1,24 @@
 package controllers
 
-import(
+import (
 	"net/http"
-	"github.com/gin-gonic/gin"
 	"simple_restfull_api/models"
+
+	"github.com/gin-gonic/gin"
 )
 
-
-
 // Add Books
-func AddBooks(c *gin.Context){
-	var book = models.Book{Title :"Perahu Kertas", Author :"Gerry LK", Code: "G12-LJ", Price: 100000}
+func AddBooks(c *gin.Context) {
+	var book = models.Book{Title: "Perahu Kertas", Author: "Gerry LK", Code: "G12-LJ", Price: 100000}
 	models.DB.Create(&book)
 	c.JSON(http.StatusOK, gin.H{"data": book})
 }
 
 // GET /books
 // Find all books
-func FindBooks(c *gin.Context){
+func FindBooks(c *gin.Context) {
 	var books []models.Book
-	var selects = []string{"title","author","code","price"}
+	var selects = []string{"title", "author", "code", "price"}
 	models.DB.Select(selects).Find(&books)
 
 	c.JSON(http.StatusOK, gin.H{"data": books})
@@ -59,7 +58,7 @@ func CreateBook(c *gin.Context) {
 	}
 
 	// Create book
-	book := models.Book{Title: input.Title, Author: input.Author, Code: input.Code,Price: input.Price }
+	book := models.Book{Title: input.Title, Author: input.Author, Code: input.Code, Price: input.Price}
 	models.DB.Create(&book)
 
 	c.JSON(http.StatusOK, gin.H{"data": book})
@@ -76,7 +75,7 @@ func CreateBookForm(c *gin.Context) {
 	}
 
 	// Create book
-	book := models.Book{Title: input.Title, Author: input.Author, Code: input.Code,Price: input.Price }
+	book := models.Book{Title: input.Title, Author: input.Author, Code: input.Code, Price: input.Price}
 	models.DB.Create(&book)
 
 	c.JSON(http.StatusOK, gin.H{"data": book})
